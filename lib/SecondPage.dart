@@ -91,6 +91,7 @@ class _SecondPageState extends State<SecondPage> {
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(

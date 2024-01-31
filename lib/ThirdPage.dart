@@ -17,6 +17,7 @@ class _ThirdPageState extends State<ThirdPage> {
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
@@ -115,7 +116,9 @@ class _ThirdPageState extends State<ThirdPage> {
                               keyboardType: TextInputType.phone,
                               onChanged: (value) {
                                 // Update the phoneNumber when the user types
-                                phoneNumber = value;
+                                setState(() {
+                                  phoneNumber = value;
+                                });
                               },
                               decoration: InputDecoration(
                                 hintText: 'Mobile Number',

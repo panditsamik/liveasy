@@ -8,7 +8,6 @@ class FourthPage extends StatefulWidget {
 }
 
 class _FourthPageState extends State<FourthPage> {
-
   Color shipper_color = Color(0xffffffff);
   Color transporter_color = Color(0xffffffff);
   int s = 0;
@@ -42,9 +41,6 @@ class _FourthPageState extends State<FourthPage> {
       }
     }
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +77,7 @@ class _FourthPageState extends State<FourthPage> {
                       ),
                     ),
                     margin:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
                     padding: EdgeInsets.all(10.0),
                     height: 100.0,
                     child: Row(
@@ -212,15 +208,21 @@ class _FourthPageState extends State<FourthPage> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+                  margin:
+                      EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
                   height: 53.0,
                   width: double.infinity,
                   child: TextButton(
                     style: ButtonStyle(
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(0.0),
+                        ),
+                      ),
                       backgroundColor:
-                      MaterialStateProperty.all<Color>(Color(0xff2E3B62)),
+                          MaterialStateProperty.all<Color>(Color(0xff2E3B62)),
                       foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
+                          MaterialStateProperty.all<Color>(Colors.white),
                     ),
                     onPressed: () {
                       Navigator.push(

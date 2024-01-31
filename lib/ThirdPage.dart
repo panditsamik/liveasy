@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:liveasy/SecondPage.dart';
 
 class ThirdPage extends StatefulWidget {
   const ThirdPage({Key? key}) : super(key: key);
@@ -9,18 +11,24 @@ class ThirdPage extends StatefulWidget {
 }
 
 class _ThirdPageState extends State<ThirdPage> {
+  late String phoneNumber;
+
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.clear, color: Colors.grey.shade800,), // Replace with your desired icon
+          icon: Icon(
+            Icons.clear,
+            color: Colors.grey.shade800,
+          ), // Replace with your desired icon
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: Colors.transparent, // Set to transparent to remove default app bar background
+        backgroundColor: Colors
+            .transparent, // Set to transparent to remove default app bar background
         elevation: 0,
       ),
       backgroundColor: Colors.white,
@@ -51,7 +59,7 @@ class _ThirdPageState extends State<ThirdPage> {
                           left: 75.0, top: 8.0, right: 75.0),
                       child: const Center(
                         child: Text(
-                          "You'll receive a 4 digit code \nto verify next.",
+                          "You'll receive a 6 digit code \nto verify next.",
                           style: TextStyle(
                             fontSize: 15.0,
                             fontWeight: FontWeight.normal,
@@ -73,7 +81,8 @@ class _ThirdPageState extends State<ThirdPage> {
                       ),
                       margin: EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 25.0),
-                      padding: EdgeInsets.only(left: 10.0, top: 4.0, bottom: 5.0, right: 10.0),
+                      padding: EdgeInsets.only(
+                          left: 10.0, top: 4.0, bottom: 5.0, right: 10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -104,35 +113,68 @@ class _ThirdPageState extends State<ThirdPage> {
                           Expanded(
                             child: TextField(
                               keyboardType: TextInputType.phone,
+                              onChanged: (value) {
+                                // Update the phoneNumber when the user types
+                                phoneNumber = value;
+                              },
                               decoration: InputDecoration(
                                 hintText: 'Mobile Number',
-                                hintStyle: TextStyle(color: Colors.grey, letterSpacing: 1.5, fontSize: 18.0),
+                                hintStyle: TextStyle(
+                                  color: Colors.grey,
+                                  letterSpacing: 1.5,
+                                  fontSize: 18.0,
+                                ),
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.transparent),
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.transparent),
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
                                 ),
                               ),
-                              cursorColor: Colors.black38, // Set the cursor color
-                            )
+                              cursorColor:
+                                  Colors.black38, // Set the cursor color
+                            ),
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 25.0, vertical: 12.0),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 25.0, vertical: 12.0),
                       height: 53.0,
                       width: double.infinity,
                       child: TextButton(
                         style: ButtonStyle(
-                          backgroundColor:
-                          MaterialStateProperty.all<Color>(Color(0xff2E3B62)),
+                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(0.0),
+                            ),
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Color(0xff2E3B62)),
                           foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
+                              MaterialStateProperty.all<Color>(Colors.white),
                         ),
                         onPressed: () {
-
+                          if (phoneNumber.length == 10) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    SecondPage(phone_no: phoneNumber),
+                              ),
+                            );
+                          } else {
+                            // Show a Snackbar indicating that the phone number is invalid
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                    'Please enter a valid 10-digit phone number.'),
+                              ),
+                            );
+                          }
                         },
                         child: const Text(
                           'CONTINUE',

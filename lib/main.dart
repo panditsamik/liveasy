@@ -1,12 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:liveasy/FourthPage.dart';
 import 'package:liveasy/SecondPage.dart';
 import 'package:liveasy/ThirdPage.dart';
+import 'package:liveasy/provider/DemoPage.dart';
 
 const List<String> list = <String>['English', 'Hindi', 'French'];
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     const MaterialApp(
       home: Scaffold(
@@ -57,15 +61,15 @@ class _FirstPageState extends State<FirstPage> {
                       child: Text(
                         "Please select your Language",
                         style: TextStyle(
-                          fontSize: 22.0,
+                          fontSize: 21.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
                   Container(
-                    margin:
-                        const EdgeInsets.only(left: 75.0, top: 5.0, right: 75.0),
+                    margin: const EdgeInsets.only(
+                        left: 75.0, top: 5.0, right: 75.0),
                     child: const Center(
                       child: Text(
                         "You can change the language at any time",
@@ -86,6 +90,11 @@ class _FirstPageState extends State<FirstPage> {
                     height: 50.0,
                     child: TextButton(
                       style: ButtonStyle(
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0.0),
+                          ),
+                        ),
                         backgroundColor:
                             MaterialStateProperty.all<Color>(Color(0xff2E3B62)),
                         foregroundColor:
@@ -94,7 +103,7 @@ class _FirstPageState extends State<FirstPage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SecondPage()),
+                          MaterialPageRoute(builder: (context) => ThirdPage()),
                         );
                       },
                       child: const Text(
